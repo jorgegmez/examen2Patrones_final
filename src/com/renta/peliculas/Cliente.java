@@ -30,7 +30,6 @@ public class Cliente {
 		Alquiler nuevoAlquiler = new Alquiler(pDisco, pDiasAlquiler);
 		if(alquileres == null || alquileres != null) {
 			this.alquileres.add(nuevoAlquiler);
-			System.out.println(nuevoAlquiler);
 			valid = true;
 		}
 		return valid;
@@ -46,7 +45,6 @@ public class Cliente {
 		while(iterator.hasNext()) {
 			int montoAlquiler = 0;
 			Alquiler alquiler = iterator.next();
-			System.out.println("This is a test");
 			switch(alquiler.getDisco().getPelicula().getCodigoPrecio()) {
 				case Pelicula.NORMAL:
 					montoAlquiler += 2;
@@ -81,7 +79,6 @@ public class Cliente {
         result += "Gano " + String.valueOf(puntosAlquilerFrecuente) +
         		  " puntos por alquiler frecuente";
         System.out.println(result);
-       System.out.println(result);
 		return result;
 	}
 	

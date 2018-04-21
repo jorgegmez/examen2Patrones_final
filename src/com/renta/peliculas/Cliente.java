@@ -2,10 +2,12 @@ package com.renta.peliculas;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import com.renta.peliculas.costos.ICalculosAlquiler;
 
-public class Cliente {
+public class Cliente{
 	private static String nombre;
 	private ArrayList<Alquiler> alquileres= new ArrayList<>();
+	protected ICalculosAlquiler costosAlquiler;
 	
 	public Cliente() {}
 	
@@ -41,25 +43,26 @@ public class Cliente {
 		
 		Iterator<Alquiler> iterator = alquileres.iterator();
 		String result = "Alquileres de " + getNombre() + ":\n";
-		
 		while(iterator.hasNext()) {
-			int montoAlquiler = 0;
+			double montoAlquiler = 0;
 			Alquiler alquiler = iterator.next();
 			switch(alquiler.getDisco().getPelicula().getCodigoPrecio()) {
 				case Pelicula.NORMAL:
 					montoAlquiler += 2;
 					if (alquiler.getDiasAlquilado() > 2) {
 						montoAlquiler += (alquiler.getDiasAlquilado() - 2) * 1.5;
-					}      
+						//montoAlquiler = this.costosAlquiler(alquiler); --> Hace reventar la app no func
+					}
 				break;
 				case Pelicula.ESTRENO:
 					montoAlquiler += alquiler.getDiasAlquilado() * 3;
+					//montoAlquiler = this.costosAlquiler(alquiler); --> Hace reventar la app no func
 				break;
 				case Pelicula.INFANTIL:
-					montoAlquiler += 1.5;
-                    if (alquiler.getDiasAlquilado() > 3) {
-                    	montoAlquiler += (alquiler.getDiasAlquilado() - 3) * 1.5;
-                    }    
+					if (alquiler.getDiasAlquilado() > 3) {
+			        	montoAlquiler += (alquiler.getDiasAlquilado() - 3) * 1.5;
+			        	//montoAlquiler = this.costosAlquiler(alquiler); --> Hace reventar la app no func
+			        }
 				break;
 			}
 			montoTotal += montoAlquiler;
@@ -82,6 +85,15 @@ public class Cliente {
 		return result;
 	}
 	
+	public double costosAlquiler(Alquiler alquiler) {
+		System.out.println(this.costosAlquiler.calculosCostoAlquiler(alquiler));
+		return this.costosAlquiler.calculosCostoAlquiler(alquiler);
+	}
+
+	public void setCostoAlquiler(ICalculosAlquiler calculadoraAlquiler) {
+		this.costosAlquiler = calculadoraAlquiler;
+	}
+	
 	public boolean persist() {
 		boolean valid = false;
 		
@@ -100,6 +112,5 @@ public class Cliente {
 	@Override
 	public String toString() {
 		return "Cliente [nombre=" + nombre + "]";
-	}
-	
+	}	
 }

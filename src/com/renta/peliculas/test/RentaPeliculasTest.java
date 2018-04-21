@@ -39,8 +39,8 @@ class RentaPeliculasTest {
 	@Test
 	void testStatement() {
 		assertEquals("Alquileres de Jorge:\n" +
-	                 "\tThe Lion King" + "\t2\n" + 
-				     "Monto total:  2.0\n" + 
+	                 "\tThe Lion King" + "\t1.5\n" + 
+				     "Monto total:  1.5\n" + 
 				     "Gano 1 puntos por alquiler frecuente",clienteTest.statement());
 	}
 

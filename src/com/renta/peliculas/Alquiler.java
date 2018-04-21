@@ -9,6 +9,8 @@ public class Alquiler {
 		this.setDiasAlquilado(pDiasAlquilado);
 	}
 
+	public Alquiler() {}
+
 	public Disco getDisco() {
 		return disco;
 	}
